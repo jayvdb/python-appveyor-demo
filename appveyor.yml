@@ -67,16 +67,22 @@ install:
   # target Python version and architecture
   - "%CMD_IN_ENV% pip install -r dev-requirements.txt"
 
+  # If COVERALLS_REPO_TOKEN has been set in the environment, prepare coveralls
+  - if defined COVERALLS_REPO_TOKEN pip install coverage git+https://github.com/jayvdb/coveralls-python@appveyor
+
 build: false  # Not a C# project, build stuff at the test step instead.
 
 test_script:
   # Build the compiled extension and run the project tests
-  - "%CMD_IN_ENV% python setup.py nosetests"
+  # If coverage was not installed, nosetests will use its default plugin
+  - "%CMD_IN_ENV% python setup.py nosetests --with-coverage --cover-package=pyappveyordemo"
 
 after_test:
   # If tests are successful, create a whl package for the project.
   - "%CMD_IN_ENV% python setup.py bdist_wheel bdist_wininst"
   - ps: "ls dist"
+  # Send the coverage data to coveralls.io
+  - if defined COVERALLS_REPO_TOKEN coveralls
 
 artifacts:
   # Archive the generated wheel package in the ci.appveyor.com build report.
