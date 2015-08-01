@@ -93,7 +93,7 @@ function InstallPip ($python_home) {
             # https://github.com/ogrisel/python-appveyor-demo/issues/10
             RunCommand "$python_path" "$GET_PIP_PATH --trusted-host pypi.python.org"
             Write-Host "Installing ndg-httpsclient to workaround pip bug on Python 2.6.5 and lower."
-            & pip.exe --trusted-host pypi.python.org install ndg-httpsclient 2>$null
+            & $pip_path --trusted-host pypi.python.org install ndg-httpsclient 2>$null
         }
     } else {
         Write-Host "pip already installed."
