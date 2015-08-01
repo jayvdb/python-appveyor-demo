@@ -59,7 +59,7 @@ install:
 
   # Upgrade to the latest version of pip to avoid displaying warnings
   # on stderr later
-  - "pip install --no-clean --no-binary all --user --upgrade pip"
+  - "pip install --user --upgrade pip"
   - "pip --version"
   # Check that we have the expected version and architecture for Python
   - "python --version"
