@@ -45,7 +45,7 @@ install:
   - ECHO "Filesystem root:"
   - ps: "ls \"C:/\""
 
-  - echo %PATH%
+  - "echo %PATH%"
 
   - ECHO "Installed SDKs:"
   - ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
