@@ -45,6 +45,8 @@ install:
   - ECHO "Filesystem root:"
   - ps: "ls \"C:/\""
 
+  - echo %PATH%
+
   - ECHO "Installed SDKs:"
   - ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
 
@@ -56,6 +58,9 @@ install:
   # done from inside the powershell script as it would require to restart
   # the parent CMD process).
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
+  - ps: & pip.exe --version
+  - ps: $newPath = '%PYTHON%;%PYTHON%\\Scripts'; $oldPath = [Environment]::GetEnvironmentVariable('path', 'machine'); [Environment]::SetEnvironmentVariable('path', "$($newPath);$($oldPath)",'Machine');
+  - ps: & pip.exe --version
 
   # Check that we have the expected version and architecture for Python
   - "python --version"
