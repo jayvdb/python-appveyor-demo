@@ -57,6 +57,10 @@ install:
   # the parent CMD process).
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
 
+  # Upgrade to the latest version of pip to avoid displaying warnings
+  # on stderr later
+  - "pip install --no-clean --upgrade pip"
+
   # Check that we have the expected version and architecture for Python
   - "python --version"
   - "python -c \"import struct; print(struct.calcsize('P') * 8)\""
