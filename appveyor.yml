@@ -28,7 +28,7 @@ install:
   # done from inside the powershell script as it would require to restart
   # the parent CMD process).
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - ps: $ErrorActionPreference = "silentlycontinue"; write-host $env:PATH; & pip.exe --version 2>$null; & pip.exe --disable-pip-version-check install --upgrade --user ndg-httpsclient 2>&1 >$null
+  - ps: $ErrorActionPreference = "silentlycontinue"; write-host $env:PATH; & pip.exe --version 2>$null; & pip.exe --disable-pip-version-check install --upgrade --user ndg-httpsclient 2>&1 >$null; write-host "all good"
 
   # Check that we have the expected version and architecture for Python
   - "python --version"
