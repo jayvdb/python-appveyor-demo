@@ -86,8 +86,18 @@ function InstallPip ($python_home) {
         Write-Host "Installing pip..."
         $webclient = New-Object System.Net.WebClient
         $webclient.DownloadFile($GET_PIP_URL, $GET_PIP_PATH)
-        Write-Host "Executing:" $python_path $GET_PIP_PATH
-        Start-Process -FilePath "$python_path" -ArgumentList "$GET_PIP_PATH" -Wait -Passthru
+        if ([version](($env:PYTHON_VERSION).replace('.x', '')) -gt [version]"2.6.5") {
+            RunCommand "$python_path" "$GET_PIP_PATH"
+        } else {
+            # Workaround for Python 2.6.5 and lower
+            # After ndg-httpsclient has been installed, pip will work without
+            # --trusted-host pypi.python.org
+            # https://github.com/ogrisel/python-appveyor-demo/issues/10
+            # https://github.com/pypa/pip/issues/2494
+            RunCommand "$python_path" "$GET_PIP_PATH --trusted-host pypi.python.org"
+            Write-Host "Installing ndg-httpsclient to workaround pip issue #2494."
+            & $pip_path --trusted-host pypi.python.org install ndg-httpsclient 2>$null
+        }
     } else {
         Write-Host "pip already installed."
     }
