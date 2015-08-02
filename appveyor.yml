@@ -7,40 +7,6 @@ environment:
 
   matrix:
 
-    # Pre-installed Python versions, which Appveyor may upgrade to
-    # a later point release.
-
-    - PYTHON: "C:\\Python27.10"
-      PYTHON_VERSION: "2.7.10"
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python27"
-      PYTHON_VERSION: "2.7.x" # currently 2.7.9
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python27-x64"
-      PYTHON_VERSION: "2.7.x" # currently 2.7.9
-      PYTHON_ARCH: "64"
-
-    - PYTHON: "C:\\Python33"
-      PYTHON_VERSION: "3.3.x" # currently 3.3.5
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python33-x64"
-      PYTHON_VERSION: "3.3.x" # currently 3.3.5
-      PYTHON_ARCH: "64"
-
-    - PYTHON: "C:\\Python34"
-      PYTHON_VERSION: "3.4.x" # currently 3.4.3
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python34-x64"
-      PYTHON_VERSION: "3.4.x" # currently 3.4.3
-      PYTHON_ARCH: "64"
-
-    # Also test a Python version not pre-installed
-    # See: https://github.com/ogrisel/python-appveyor-demo/issues/10
-
     - PYTHON: "C:\\Python266"
       PYTHON_VERSION: "2.6.6"
       PYTHON_ARCH: "32"
@@ -62,7 +28,7 @@ install:
   # done from inside the powershell script as it would require to restart
   # the parent CMD process).
   - "SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%"
-  - ps: $ErrorActionPreference = "silentlycontinue"; write-host $env:PATH; & pip --version 2>$null; & pip --disable-pip-version-check install --upgrade --user ndg-httpsclient 2>&1 >$null
+  - ps: [void](& pip --disable-pip-version-check install --upgrade --user ndg-httpsclient)
 
   # Check that we have the expected version and architecture for Python
   - "python --version"
