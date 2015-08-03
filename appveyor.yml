@@ -7,6 +7,10 @@ environment:
 
   matrix:
 
+    - PYTHON: "C:\\Python270"
+      PYTHON_VERSION: "2.7.0"
+      PYTHON_ARCH: "32"
+
     # Pre-installed Python versions, which Appveyor may upgrade to
     # a later point release.
 
