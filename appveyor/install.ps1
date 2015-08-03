@@ -11,7 +11,7 @@ $GET_PIP_PATH = "C:\get-pip.py"
 function DownloadPython ($python_version, $platform_suffix) {
     $python_version_obj = [version]$python_version
     if ($python_version_obj -lt [version]'3.3.0' -and $python_version_obj.Build -eq 0) {
-        $python_version = $python_version_obj.Major + '.' + $python_version_obj.Minor
+        $python_version = [string]$python_version_obj.Major + '.' + [string]$python_version_obj.Minor
     }
     $webclient = New-Object System.Net.WebClient
     $filename = "python-" + $python_version + $platform_suffix + ".msi"
