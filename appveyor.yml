@@ -7,6 +7,17 @@ environment:
 
   matrix:
 
+    # Try Python 2.6.5
+
+    - PYTHON: "C:\\Python265"
+      PYTHON_VERSION: "2.6.5"
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python265-x64"
+      PYTHON_VERSION: "2.6.5"
+      PYTHON_ARCH: "64"
+
+
     # Python 2.7.10 is the latest version and is not pre-installed.
 
     - PYTHON: "C:\\Python27.10"
@@ -46,17 +57,6 @@ environment:
       PYTHON_ARCH: "64"
 
     # Python versions not pre-installed
-
-    # Python 2.6.6 is the latest Python 2.6 with a Windows installer
-    # See: https://github.com/ogrisel/python-appveyor-demo/issues/10
-
-    - PYTHON: "C:\\Python266"
-      PYTHON_VERSION: "2.6.6"
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python266-x64"
-      PYTHON_VERSION: "2.6.6"
-      PYTHON_ARCH: "64"
 
     - PYTHON: "C:\\Python35"
       PYTHON_VERSION: "3.5.0"
